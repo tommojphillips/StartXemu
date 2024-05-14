@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartXemu", "StartXemu.csproj", "{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		help|x86 = help|x86
+		ls|x86 = ls|x86
+		Release|x86 = Release|x86
+		TEST_ENV|x86 = TEST_ENV|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}.Debug|x86.ActiveCfg = Debug|x86
+		{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}.Debug|x86.Build.0 = Debug|x86
+		{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}.help|x86.ActiveCfg = help|x86
+		{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}.help|x86.Build.0 = help|x86
+		{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}.ls|x86.ActiveCfg = ls|x86
+		{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}.ls|x86.Build.0 = ls|x86
+		{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}.Release|x86.ActiveCfg = Release|x86
+		{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}.Release|x86.Build.0 = Release|x86
+		{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}.TEST_ENV|x86.ActiveCfg = TEST_ENV|x86
+		{12BB7FFE-9CAA-45CF-9B08-0F3414341FAF}.TEST_ENV|x86.Build.0 = TEST_ENV|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {362B44F2-EF5A-4213-898F-658AD07F6E16}
+	EndGlobalSection
+EndGlobal
