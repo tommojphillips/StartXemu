@@ -16,40 +16,6 @@ namespace StartXemu
         {
             init();
 
-
-#if TEST_ENV // test vars
-
-            string xemuDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\ogx_dev\\xemu";
-            Environment.SetEnvironmentVariable("XEMU_DIR", xemuDir);
-            
-            //Environment.SetEnvironmentVariable("XEMU_CFG", "D:\\xbox\\public\\xbuildtools\\xemu\\cfg\\xemu.toml");
-            Environment.SetEnvironmentVariable("XEMU_CFG", $"{xemuDir}\\cfg\\xemu.toml");
-            
-            Environment.SetEnvironmentVariable("XEMU_SERIAL", "1");
-
-            Environment.SetEnvironmentVariable("XEMU_MCPX", "boot\\mcpx_1.0.bin");
-
-            //Environment.SetEnvironmentVariable("XEMU_EEPROM", "eeprom\\eeprom.bin");
-
-            //Environment.SetEnvironmentVariable("XEMU_BIOS", "D:\\builds\\fre\\boot\\xboxrom.bin");
-            Environment.SetEnvironmentVariable("XEMU_BIOS", "bios\\d_4627.bin");
-
-            //Environment.SetEnvironmentVariable("XEMU_DVD", "null");
-            //Environment.SetEnvironmentVariable("XEMU_DVD", "D:\\builds\\fre\\dump\\EEPROMdumpp.iso");
-
-            Environment.SetEnvironmentVariable("XEMU_HDD", "hdd\\hdd.qcow2");
-
-            Environment.SetEnvironmentVariable("XEMU_SIZE", "640x480");
-            Environment.SetEnvironmentVariable("XEMU_MEM", "64");
-
-            Environment.SetEnvironmentVariable("XEMU_POS", "2");
-
-            Environment.SetEnvironmentVariable("XEMU_SKIP_ANI", "1");
-
-            Environment.SetEnvironmentVariable("PATH", Environment.ExpandEnvironmentVariables("%PATH%;D:\\xbox\\public\\idw"));
-
-#endif
-
             config = new StartXEMU();
 
             try
@@ -61,12 +27,6 @@ namespace StartXemu
             {
                 Console.WriteLine("Error: " + e.Message);
                 Environment.ExitCode = 1;
-
-#if TEST_ENV
-                Console.WriteLine("Press any key to exit...");
-                Console.ReadLine();
-#endif
-
             }
 
             cleanup();
@@ -93,10 +53,6 @@ namespace StartXemu
                 {
                     case "-?":
                         printHelp();
-#if TEST_ENV
-                        Console.WriteLine("Press any key to exit...");
-                        Console.ReadLine();
-#endif
                         Environment.Exit(0);
                         return;
 
@@ -106,6 +62,7 @@ namespace StartXemu
                             switches.ls = true;
                             switches.lsSection = args[i + 1];
                         }
+
                         return;
                     
                     case "-cmd":
@@ -115,6 +72,7 @@ namespace StartXemu
                             switches.cmd = args[i + 1];
                             i++;
                         }
+
                         break;
 
                     case "-qemu_cli":

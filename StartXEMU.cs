@@ -32,7 +32,6 @@ namespace StartXemu
         private int serial;
         private Process xemuProc;
         private Process cmdProc;
-        private Thread cmdThread;
 
         private bool startupSizeOk = false;
         private XSwitch sw;
@@ -102,8 +101,18 @@ namespace StartXemu
             // add config path override switch
             args.Append($"-config_path {cfg}");
 
-            if (serial > 0) // add serial stdio switch
-                args.Append(" -s -device lpc47m157 -serial stdio");
+            switch (serial)
+            {
+                case 1:
+                    args.Append(" -s -device lpc47m157 -serial stdio");
+                    break;
+                case 2:
+                    args.Append(" -s -device lpc47m157 -serial COM2");
+                    break;
+                case 3:
+                    args.Append(" -s -device lpc47m157 -serial  tcp::4444,server,nowait");
+                    break;
+            }
 
             xemuProc.StartInfo.FileName = exe;
             xemuProc.StartInfo.Arguments = args.ToString();
@@ -119,6 +128,9 @@ namespace StartXemu
 
             // wait for xemu window to be created.
             xemuProc.WaitForInputIdle();
+            
+            // force focus on xemu window
+            NativeMethods.SetForegroundWindow(xemuProc.MainWindowHandle);
 
             if (startupSizeOk && startupPosition > 0)
             {
@@ -260,7 +272,7 @@ namespace StartXemu
                     case "mem_limit":
                         // only 64 and 128.
 
-                        if (!Int32.TryParse(var.Trim(), out int mem) || (mem != 64 && mem != 128))
+                        if (!int.TryParse(var.Trim(), out int mem) || (mem != 64 && mem != 128))
                             var = "64";
                         varStr = var + "MB";
                         break;
@@ -283,6 +295,7 @@ namespace StartXemu
                                 varStr = var;
                                 break;
                         }
+
                         break;
 
                     case "bootrom_path":
@@ -306,11 +319,8 @@ namespace StartXemu
 
                     case "skip_boot_anim":
                         // only true or false
-                        Int32.TryParse(var, out int skipAni);
-                        if (skipAni > 0)
-                            var = "true";
-                        else
-                            var = "false";
+                        int.TryParse(var, out int skipAni);
+                        var = skipAni > 0 ? "true" : "false";
                         varStr = var;
                         break;
                 }
@@ -415,12 +425,12 @@ namespace StartXemu
             // XEMU_SERIAL
             if (checkVar("XEMU_SERIAL", out string serialStr))
             {
-                if (!Int32.TryParse(serialStr.Trim(), out serial))
+                if (!int.TryParse(serialStr.Trim(), out serial))
                 {
                     serial = 0;
                 }
 
-                serial = Math.Min(Math.Max(serial, 0), 2);
+                serial = Math.Min(Math.Max(serial, 0), 3);
             }
 
             // XEMU_DVD
@@ -433,7 +443,7 @@ namespace StartXemu
             // XEMU_POS
             if (checkVar("XEMU_POS", out string pos))
             {
-                if (!Int32.TryParse(pos, out startupPosition))
+                if (!int.TryParse(pos, out startupPosition))
                 {
                     startupPosition = 0;
                 }
@@ -451,8 +461,8 @@ namespace StartXemu
                     size = "640x480";
 
                 string[] res = size.Split('x');
-                startupWidth = Int32.Parse(res[0]);
-                startupHeight = Int32.Parse(res[1]);
+                startupWidth = int.Parse(res[0]);
+                startupHeight = int.Parse(res[1]);
             }
         }
         public void getDefaultConfig()

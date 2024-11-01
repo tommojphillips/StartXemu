@@ -15,6 +15,5 @@
             this.defaultValue = defaultValue;
 
         }
-
     }
 }

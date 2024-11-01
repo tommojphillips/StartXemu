@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>StartXemu</RootNamespace>
     <AssemblyName>startxemu</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>StartXemu.Program</StartupObject>
